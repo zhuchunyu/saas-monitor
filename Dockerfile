@@ -5,6 +5,7 @@ WORKDIR /app
 MAINTAINER zhuchunyu <zhuchunyu@cloud-star.com.cn>
 
 COPY . /app
+ADD pip.conf /root/.pip/pip.conf
 
 RUN pip install -r requirements.txt
 
