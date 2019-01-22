@@ -6,20 +6,22 @@ import prediction_seasonal as prediction_seasonal
 from pymongo import MongoClient
 import urllib.parse
 
-username = urllib.parse.quote_plus('rightcloud')
-password = urllib.parse.quote_plus('H89lBgAg')
+import envconfig
+config = envconfig.getConfig()
 
-mongoClient = MongoClient('mongodb://%s:%s@10.68.6.3:27017' % (username, password))
+username = urllib.parse.quote_plus(config['MONGO_USER'])
+password = urllib.parse.quote_plus(config['MONGO_PWD'])
+
+mongoClient = MongoClient('mongodb://%s:%s@%s:%s' % (username, password, config['MONGO_HOST'], config['MONGO_PORT']))
 print(mongoClient)
 
-rightcloud = mongoClient["rightcloud"]
+rightcloud = mongoClient[config['MONGO_DATABASE']]
 
 predictions = rightcloud["predictions"]
 print(predictions)
 
 def worker(data, resourceId, commonMetricName):
     print(resourceId)
-    print(data)
 
     data = pd.DataFrame(data)
     data['time'] = pd.to_datetime(data['time'], format='%Y-%m-%d %H:%M:%S')

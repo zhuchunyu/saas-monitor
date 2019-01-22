@@ -7,14 +7,17 @@ import pymongo
 from pymongo import MongoClient
 import urllib.parse
 import time
+import envconfig
 
-username = urllib.parse.quote_plus('rightcloud')
-password = urllib.parse.quote_plus('H89lBgAg')
+config = envconfig.getConfig()
 
-mongoClient = MongoClient('mongodb://%s:%s@10.68.6.3:27017' % (username, password))
+username = urllib.parse.quote_plus(config['MONGO_USER'])
+password = urllib.parse.quote_plus(config['MONGO_PWD'])
+
+mongoClient = MongoClient('mongodb://%s:%s@%s:%s' % (username, password, config['MONGO_HOST'], config['MONGO_PORT']))
 print(mongoClient)
 
-rightcloud = mongoClient["rightcloud"]
+rightcloud = mongoClient[config['MONGO_DATABASE']]
 
 predictions = rightcloud["predictions"]
 print(predictions)
