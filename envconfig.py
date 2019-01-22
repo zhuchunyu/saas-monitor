@@ -8,11 +8,13 @@ def getConfig():
     MONGO_DATABASE = os.getenv('MONGO_IP', 'rightcloud')
     MONGO_USER = os.getenv('MONGO_IP', 'rightcloud')
     MONGO_PWD = os.getenv('MONGO_IP', 'H89lBgAg')
+    DEBUG = os.getenv('DEBUG', 'true')
 
     return {
         'MONGO_HOST': MONGO_HOST,
         'MONGO_PORT': MONGO_PORT,
         'MONGO_DATABASE': MONGO_DATABASE,
         'MONGO_USER': MONGO_USER,
-        'MONGO_PWD': MONGO_PWD
+        'MONGO_PWD': MONGO_PWD,
+        'DEBUG': DEBUG
     }
