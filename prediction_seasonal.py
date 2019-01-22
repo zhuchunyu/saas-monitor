@@ -4,7 +4,7 @@ import warnings
 import itertools
 import pandas as pd
 import statsmodels.api as sm
-import time
+import time, sys
 
 def prediction_seasonal(data, seasonal_s = 12):
     q = d = range(0, 2)
@@ -39,6 +39,7 @@ def prediction_seasonal(data, seasonal_s = 12):
                 results = mod.fit(disp=False)
 
                 print('SARIMAX {} x {} - AIC: {}'.format(param, param_seasonal, results.aic))
+                sys.stdout.flush()
                 a_i_c.append(results.aic)
                 SARIMAX_model.append([param, param_seasonal])
             except Exception as err:

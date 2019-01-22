@@ -3,7 +3,7 @@
 import warnings
 import itertools
 import statsmodels.api as sm
-import time
+import time, sys
 
 def prediction_random(data):
     q = range(0, 2)
@@ -31,6 +31,7 @@ def prediction_random(data):
             results = mod.fit(disp=False)
 
             print('SARIMAX {} - AIC: {}'.format(param, results.aic))
+            sys.stdout.flush()
             a_i_c.append(results.aic)
             SARIMAX_model.append([param])
         except Exception as err:
